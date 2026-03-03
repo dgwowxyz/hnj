@@ -1,7 +1,3 @@
-
-
-local LoadingTick = os.clock()
-
 if getgenv().Library then 
     getgenv().Library:Unload()
 end
