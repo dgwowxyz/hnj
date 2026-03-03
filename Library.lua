@@ -1,129 +1,4 @@
---[[
-    Made by samet.exe
 
-    Assign different flags to each element to prevent from configs overriding eachother
-    Example script is at the bottom
-
-    Documentation:
-        function Library:Window(Data: table
-        Name/name: string,
-        Size/size: UDim2,
-        GradientTitle/gradienttitle: table
-    )
-
-    function Window:Page(Data: table
-        Name/name: string,
-        Columns/columns: number
-    )
-
-    function Page:Section(Data: table
-        Name/name: string,
-        Side/side: number,
-    )
-
-    function Page:Playerlist()
-
-    function Section:Label(Data: table
-        Name/name: string,
-        Alignment/alignment: string
-    )
-
-    function Section:Toggle(Data: table
-        Name/name: string,
-        Default/default: boolean,
-        Flag/flag: string,
-        Risky/risky: boolean,
-        Callback/callback: function
-    )
-
-    function Section:Button(Data: table
-        Name/name: string,
-        Risky/risky: boolean,
-        Callback/callback: function
-    )
-
-    function Section:Slider(Data: table
-        Name/name: string,
-        Min/min: number,
-        Max/max: number,
-        Decimals/decimals: number,
-        Default/default: number,
-        Suffix/suffix: string,
-        Flag/flag: string,
-        Callback/callback: function
-    )
-
-    function Section:Textbox(Data: table
-        Name/name: string,
-        Default/default: string,
-        Placeholder/placeholder: string,
-        Flag/flag: string,
-        Callback/callback: function
-    )
-
-    function Section:Dropdown(Data: table
-        Name/name: string,
-        Items/items: table,
-        Default/default: string,
-        MaxSize/maxsize: number,
-        Flag/flag: string,
-        Multi/multi: boolean,
-        Callback/callback: function
-    )
-
-    function Section:Listbox(Data: table
-        Size/size: number,
-        Items/items: table,
-        Default/default: string,
-        Multi/multi: boolean,
-        Flag/flag: string,
-        Callback/callback: function
-    )
-
-    function Label:Keybind(Data: table
-        Name/name: string,
-        Mode/mode: string,
-        Default/default: EnumItem,
-        Flag/flag: string,
-        Callback/callback: function
-    )
-
-    function Label:Colorpicker(Data: table
-        Name/name: string,
-        Default/default: Color3,
-        Alpha/alpha: number,
-        Flag/flag: string,
-        Callback/callback: function
-    )
-
-    function Toggle:Colorpicker(Data: table
-        Name/name: string,
-        Default/default: Color3,
-        Alpha/alpha: number,
-        Flag/flag: string,
-        Callback/callback: function
-    )
-
-    function Toggle:Keybind(Data: table
-        Name/name: string,
-        Mode/mode: string,
-        Default/default: EnumItem,
-        Flag/flag: string,
-        Callback/callback: function
-    )
-
-    function Sections:Textbox(Data: table
-        Name/name: string,
-        Default/default: string,
-        Placeholder/placeholder: string,
-        Flag/flag: string,
-        Callback/callback: function
-    )
-
-    function Library:Watermark(Text: string)
-    function Library:Notification(Text: string, Duration: number, Color: Color3, Icon: table)
-    function Library:KeybindList()
-]]
 
 local LoadingTick = os.clock()
 
@@ -326,269 +201,50 @@ local Library do
         end
     end
 
-    local Themes = {
-        ["Default"] = {
-            ["Window Background"] = FromRGB(43, 43, 43),
-            ["Inline"] = FromRGB(0, 0, 0),
-            ["Text"] = FromRGB(255, 255, 255),
-            ["Section Background"] = FromRGB(0, 0, 0),
-            ["Element"] = FromRGB(17, 22, 22),
-            ["Border"] = FromRGB(40, 40, 40),
-            ["Outline"] = FromRGB(0, 0, 0),
-            ["Dark Liner"] = FromRGB(48, 76, 99),
-            ["Risky"] = FromRGB(79, 145, 201),
-            ["Accent"] = FromRGB(79, 145, 201)
-        },
-    
-        ["U T O P I A"] = {
-            ["Window Background"] = FromRGB(43, 43, 43),
-            ["Inline"] = FromRGB(12, 12, 12),
-            ["Text"] = FromRGB(180, 180, 180),
-            ["Section Background"] = FromRGB(19, 19, 19),
-            ["Element"] = FromRGB(63, 63, 63),
-            ["Border"] = FromRGB(68, 68, 68),
-            ["Outline"] = FromRGB(0, 0, 0),
-            ["Dark Liner"] = FromRGB(56, 56, 56),
-            ["Risky"] = FromRGB(255, 50, 50),
-            ["Accent"] = FromRGB(31, 226, 130)
-        },
+	local Themes = {
+	    ["Default"] = { ["Window Background"] = FromRGB(43, 43, 43), ["Inline"] = FromRGB(0, 0, 0), ["Text"] = FromRGB(255, 255, 255), ["Section Background"] = FromRGB(0, 0, 0), ["Element"] = FromRGB(17, 22, 22), ["Border"] = FromRGB(40, 40, 40), ["Outline"] = FromRGB(0, 0, 0), ["Dark Liner"] = FromRGB(48, 76, 99), ["Risky"] = FromRGB(79, 145, 201), ["Accent"] = FromRGB(79, 145, 201) },
 
-        ["Bitchbot"] = {
-            ["Window Background"] = FromRGB(33, 33, 33),
-            ["Inline"] = FromRGB(14, 14, 14),
-            ["Text"] = FromRGB(255, 255, 255),
-            ["Section Background"] = FromRGB(18, 18, 18),
-            ["Element"] = FromRGB(14, 14, 14),
-            ["Border"] = FromRGB(0, 0, 0),
-            ["Outline"] = FromRGB(19, 19, 19),
-            ["Dark Liner"] = FromRGB(21, 21, 21),
-            ["Risky"] = FromRGB(255, 50, 50),
-            ["Accent"] = FromRGB(158, 79, 249)
-        },
+	    ["U T O P I A"] = { ["Window Background"] = FromRGB(43, 43, 43), ["Inline"] = FromRGB(12, 12, 12), ["Text"] = FromRGB(180, 180, 180), ["Section Background"] = FromRGB(19, 19, 19), ["Element"] = FromRGB(63, 63, 63), ["Border"] = FromRGB(68, 68, 68), ["Outline"] = FromRGB(0, 0, 0), ["Dark Liner"] = FromRGB(56, 56, 56), ["Risky"] = FromRGB(255, 50, 50), ["Accent"] = FromRGB(31, 226, 130) },
 
-        ["Onetap"] = {
-            ["Window Background"] = FromRGB(71, 71, 71),
-            ["Inline"] = FromRGB(30, 30, 30),
-            ["Text"] = FromRGB(244, 239, 232),
-            ["Section Background"] = FromRGB(20, 20, 20),
-            ["Element"] = FromRGB(33, 33, 33),
-            ["Border"] = FromRGB(0, 0, 0),
-            ["Outline"] = FromRGB(51, 51, 51),
-            ["Dark Liner"] = FromRGB(22, 22, 20),
-            ["Risky"] = FromRGB(255, 50, 50),
-            ["Accent"] = FromRGB(237, 170, 0)
-        },
+	    ["Bitchbot"] = { ["Window Background"] = FromRGB(33, 33, 33), ["Inline"] = FromRGB(14, 14, 14), ["Text"] = FromRGB(255, 255, 255), ["Section Background"] = FromRGB(18, 18, 18), ["Element"] = FromRGB(14, 14, 14), ["Border"] = FromRGB(0, 0, 0), ["Outline"] = FromRGB(19, 19, 19), ["Dark Liner"] = FromRGB(21, 21, 21), ["Risky"] = FromRGB(255, 50, 50), ["Accent"] = FromRGB(158, 79, 249) },
 
-        ["Aqua"] = {
-            ["Window Background"] = FromRGB(71, 84, 99),
-            ["Inline"] = FromRGB(31, 35, 39),
-            ["Text"] = FromRGB(255, 255, 255),
-            ["Section Background"] = FromRGB(22, 25, 28),
-            ["Element"] = FromRGB(58, 66, 77),
-            ["Border"] = FromRGB(48, 56, 63),
-            ["Outline"] = FromRGB(20, 25, 30),
-            ["Dark Liner"] = FromRGB(38, 45, 53),
-            ["Risky"] = FromRGB(255, 50, 50),
-            ["Accent"] = FromRGB(104, 214, 255)
-        },
+	    ["Onetap"] = { ["Window Background"] = FromRGB(71, 71, 71), ["Inline"] = FromRGB(30, 30, 30), ["Text"] = FromRGB(244, 239, 232), ["Section Background"] = FromRGB(20, 20, 20), ["Element"] = FromRGB(33, 33, 33), ["Border"] = FromRGB(0, 0, 0), ["Outline"] = FromRGB(51, 51, 51), ["Dark Liner"] = FromRGB(22, 22, 20), ["Risky"] = FromRGB(255, 50, 50), ["Accent"] = FromRGB(237, 170, 0) },
 
-        ["Linoria"] = {
-          ["Window Background"] = FromHex("1c1c1c"),
-          ["Inline"] = FromHex("141414"),
-          ["Text"] = FromHex("ffffff"),
-          ["Section Background"] = FromHex("141414"),
-          ["Element"] = FromHex("1c1c1c"),
-          ["Border"] = FromHex("323232"),
-          ["Outline"] = FromHex("323232"),
-          ["Dark Liner"] = FromHex("1c1c1c"),
-          ["Risky"] = FromHex("ff5555"),
-          ["Accent"] = FromHex("0055ff")
-        },
-    
-        ["Radioactive"] = {
-        ["Window Background"] = FromHex("000000"),
-        ["Inline"] = FromHex("000000"),
-        ["Text"] = FromHex("70ff59"),
-        ["Section Background"] = FromHex("000000"),
-        ["Element"] = FromHex("000000"),
-        ["Border"] = FromHex("00ff00"),
-        ["Outline"] = FromHex("00ff00"),
-        ["Dark Liner"] = FromHex("000000"),
-        ["Risky"] = FromHex("ff5555"),
-        ["Accent"] = FromHex("00ff00")
-        },
-    
-        ["BBot"] = {
-        ["Window Background"] = FromHex("1e1e1e"),
-        ["Inline"] = FromHex("232323"),
-        ["Text"] = FromHex("ffffff"),
-        ["Section Background"] = FromHex("232323"),
-        ["Element"] = FromHex("1e1e1e"),
-        ["Border"] = FromHex("141414"),
-        ["Outline"] = FromHex("141414"),
-        ["Dark Liner"] = FromHex("1e1e1e"),
-        ["Risky"] = FromHex("ff5555"),
-        ["Accent"] = FromHex("7e48a3")
-        },
-    
-        ["Fatality"] = {
-        ["Window Background"] = FromHex("1e1842"),
-        ["Inline"] = FromHex("191335"),
-        ["Text"] = FromHex("ffffff"),
-        ["Section Background"] = FromHex("191335"),
-        ["Element"] = FromHex("1e1842"),
-        ["Border"] = FromHex("3c355d"),
-        ["Outline"] = FromHex("3c355d"),
-        ["Dark Liner"] = FromHex("1e1842"),
-        ["Risky"] = FromHex("ff5555"),
-        ["Accent"] = FromHex("c50754")
-        },
-    
-        ["Jester"] = {
-        ["Window Background"] = FromHex("242424"),
-        ["Inline"] = FromHex("1c1c1c"),
-        ["Text"] = FromHex("ffffff"),
-        ["Section Background"] = FromHex("1c1c1c"),
-        ["Element"] = FromHex("242424"),
-        ["Border"] = FromHex("373737"),
-        ["Outline"] = FromHex("373737"),
-        ["Dark Liner"] = FromHex("242424"),
-        ["Risky"] = FromHex("ff5555"),
-        ["Accent"] = FromHex("db4467")
-        },
-    
-        ["Mint"] = {
-        ["Window Background"] = FromHex("242424"),
-        ["Inline"] = FromHex("1c1c1c"),
-        ["Text"] = FromHex("ffffff"),
-        ["Section Background"] = FromHex("1c1c1c"),
-        ["Element"] = FromHex("242424"),
-        ["Border"] = FromHex("373737"),
-        ["Outline"] = FromHex("373737"),
-        ["Dark Liner"] = FromHex("242424"),
-        ["Risky"] = FromHex("ff5555"),
-        ["Accent"] = FromHex("3db488")
-        },
-    
-        ["Tokyo Night"] = {
-        ["Window Background"] = FromHex("191925"),
-        ["Inline"] = FromHex("16161f"),
-        ["Text"] = FromHex("ffffff"),
-        ["Section Background"] = FromHex("16161f"),
-        ["Element"] = FromHex("191925"),
-        ["Border"] = FromHex("323232"),
-        ["Outline"] = FromHex("323232"),
-        ["Dark Liner"] = FromHex("191925"),
-        ["Risky"] = FromHex("ff5555"),
-        ["Accent"] = FromHex("6759b3")
-        },
-    
-        ["Ubuntu"] = {
-        ["Window Background"] = FromHex("3e3e3e"),
-        ["Inline"] = FromHex("323232"),
-        ["Text"] = FromHex("ffffff"),
-        ["Section Background"] = FromHex("323232"),
-        ["Element"] = FromHex("3e3e3e"),
-        ["Border"] = FromHex("191919"),
-        ["Outline"] = FromHex("191919"),
-        ["Dark Liner"] = FromHex("3e3e3e"),
-        ["Risky"] = FromHex("ff5555"),
-        ["Accent"] = FromHex("e2581e")
-        },
-    
-        ["Quartz"] = {
-        ["Window Background"] = FromHex("232330"),
-        ["Inline"] = FromHex("1d1b26"),
-        ["Text"] = FromHex("ffffff"),
-        ["Section Background"] = FromHex("1d1b26"),
-        ["Element"] = FromHex("232330"),
-        ["Border"] = FromHex("27232f"),
-        ["Outline"] = FromHex("27232f"),
-        ["Dark Liner"] = FromHex("232330"),
-        ["Risky"] = FromHex("ff5555"),
-        ["Accent"] = FromHex("426e87")
-        },
-    
-        ["Octohook"] = {
-        ["Window Background"] = FromHex("232323"),
-        ["Inline"] = FromHex("121212"),
-        ["Text"] = FromHex("ebebeb"),
-        ["Section Background"] = FromHex("121212"),
-        ["Element"] = FromHex("232323"),
-        ["Border"] = FromHex("3c3c3c"),
-        ["Outline"] = FromHex("3c3c3c"),
-        ["Dark Liner"] = FromHex("232323"),
-        ["Risky"] = FromHex("ff5555"),
-        ["Accent"] = FromHex("ff87ff")
-        },
-    
-        ["Nekocheat"] = {
-        ["Window Background"] = FromHex("121212"),
-        ["Inline"] = FromHex("121212"),
-        ["Text"] = FromHex("ffffff"),
-        ["Section Background"] = FromHex("121212"),
-        ["Element"] = FromHex("121212"),
-        ["Border"] = FromHex("3c3c3c"),
-        ["Outline"] = FromHex("3c3c3c"),
-        ["Dark Liner"] = FromHex("121212"),
-        ["Risky"] = FromHex("ff5555"),
-        ["Accent"] = FromHex("e21e70")
-        },
-    
-        ["Nekocheat Blue"] = {
-        ["Window Background"] = FromHex("121212"),
-        ["Inline"] = FromHex("121212"),
-        ["Text"] = FromHex("ffffff"),
-        ["Section Background"] = FromHex("121212"),
-        ["Element"] = FromHex("121212"),
-        ["Border"] = FromHex("3c3c3c"),
-        ["Outline"] = FromHex("3c3c3c"),
-        ["Dark Liner"] = FromHex("121212"),
-        ["Risky"] = FromHex("ff5555"),
-        ["Accent"] = FromHex("00f7ff")
-        },
-    
-        ["Gamesense"] = {
-        ["Window Background"] = FromHex("111111"),
-        ["Inline"] = FromHex("111111"),
-        ["Text"] = FromHex("ebebeb"),
-        ["Section Background"] = FromHex("111111"),
-        ["Element"] = FromHex("111111"),
-        ["Border"] = FromHex("2f2f2f"),
-        ["Outline"] = FromHex("2f2f2f"),
-        ["Dark Liner"] = FromHex("111111"),
-        ["Risky"] = FromHex("ff5555"),
-        ["Accent"] = FromHex("93b81a")
-        },
-    
-        ["Twitch"] = {
-        ["Window Background"] = FromHex("1f1f23"),
-        ["Inline"] = FromHex("0e0e0e"),
-        ["Text"] = FromHex("ebebeb"),
-        ["Section Background"] = FromHex("0e0e0e"),
-        ["Element"] = FromHex("1f1f23"),
-        ["Border"] = FromHex("2d2d2d"),
-        ["Outline"] = FromHex("2d2d2d"),
-        ["Dark Liner"] = FromHex("1f1f23"),
-        ["Risky"] = FromHex("ff5555"),
-        ["Accent"] = FromHex("a970ff")
-        },
-    
-        ["missclick.lua"] = {
-        ["Window Background"] = FromHex("121212"),
-        ["Inline"] = FromHex("121212"),
-        ["Text"] = FromHex("ebebeb"),
-        ["Section Background"] = FromHex("121212"),
-        ["Element"] = FromHex("121212"),
-        ["Border"] = FromHex("34003a"),
-        ["Outline"] = FromHex("34003a"),
-        ["Dark Liner"] = FromHex("121212"),
-        ["Risky"] = FromHex("ff5555"),
-        ["Accent"] = FromHex("bd00ff")
-        }
+	    ["Aqua"] = { ["Window Background"] = FromRGB(71, 84, 99), ["Inline"] = FromRGB(31, 35, 39), ["Text"] = FromRGB(255, 255, 255), ["Section Background"] = FromRGB(22, 25, 28), ["Element"] = FromRGB(58, 66, 77), ["Border"] = FromRGB(48, 56, 63), ["Outline"] = FromRGB(20, 25, 30), ["Dark Liner"] = FromRGB(38, 45, 53), ["Risky"] = FromRGB(255, 50, 50), ["Accent"] = FromRGB(104, 214, 255) },
 
-    Library.Theme = TableClone(Themes["Default"])
-    Library.Themes = Themes
+	    ["Linoria"] = { ["Window Background"] = FromRGB(28, 28, 28), ["Inline"] = FromRGB(20, 20, 20), ["Text"] = FromRGB(255, 255, 255), ["Section Background"] = FromRGB(20, 20, 20), ["Element"] = FromRGB(28, 28, 28), ["Border"] = FromRGB(50, 50, 50), ["Outline"] = FromRGB(50, 50, 50), ["Dark Liner"] = FromRGB(28, 28, 28), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(0, 85, 255) },
+
+	    ["Radioactive"] = { ["Window Background"] = FromRGB(0, 0, 0), ["Inline"] = FromRGB(0, 0, 0), ["Text"] = FromRGB(112, 255, 89), ["Section Background"] = FromRGB(0, 0, 0), ["Element"] = FromRGB(0, 0, 0), ["Border"] = FromRGB(0, 255, 0), ["Outline"] = FromRGB(0, 255, 0), ["Dark Liner"] = FromRGB(0, 0, 0), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(0, 255, 0) },
+	
+	    ["BBot"] = { ["Window Background"] = FromRGB(30, 30, 30), ["Inline"] = FromRGB(35, 35, 35), ["Text"] = FromRGB(255, 255, 255), ["Section Background"] = FromRGB(35, 35, 35), ["Element"] = FromRGB(30, 30, 30), ["Border"] = FromRGB(20, 20, 20), ["Outline"] = FromRGB(20, 20, 20), ["Dark Liner"] = FromRGB(30, 30, 30), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(126, 72, 163) },
+
+	    ["Fatality"] = { ["Window Background"] = FromRGB(30, 24, 66), ["Inline"] = FromRGB(25, 19, 53), ["Text"] = FromRGB(255, 255, 255), ["Section Background"] = FromRGB(25, 19, 53), ["Element"] = FromRGB(30, 24, 66), ["Border"] = FromRGB(60, 53, 93), ["Outline"] = FromRGB(60, 53, 93), ["Dark Liner"] = FromRGB(30, 24, 66), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(197, 7, 84) },
+
+	    ["Jester"] = { ["Window Background"] = FromRGB(36, 36, 36), ["Inline"] = FromRGB(28, 28, 28), ["Text"] = FromRGB(255, 255, 255), ["Section Background"] = FromRGB(28, 28, 28), ["Element"] = FromRGB(36, 36, 36), ["Border"] = FromRGB(55, 55, 55), ["Outline"] = FromRGB(55, 55, 55), ["Dark Liner"] = FromRGB(36, 36, 36), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(219, 68, 103) },
+
+	    ["Mint"] = { ["Window Background"] = FromRGB(36, 36, 36), ["Inline"] = FromRGB(28, 28, 28), ["Text"] = FromRGB(255, 255, 255), ["Section Background"] = FromRGB(28, 28, 28), ["Element"] = FromRGB(36, 36, 36), ["Border"] = FromRGB(55, 55, 55), ["Outline"] = FromRGB(55, 55, 55), ["Dark Liner"] = FromRGB(36, 36, 36), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(61, 180, 136) },
+
+	    ["Tokyo Night"] = { ["Window Background"] = FromRGB(25, 25, 37), ["Inline"] = FromRGB(22, 22, 31), ["Text"] = FromRGB(255, 255, 255), ["Section Background"] = FromRGB(22, 22, 31), ["Element"] = FromRGB(25, 25, 37), ["Border"] = FromRGB(50, 50, 50), ["Outline"] = FromRGB(50, 50, 50), ["Dark Liner"] = FromRGB(25, 25, 37), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(103, 89, 179) },
+
+	    ["Ubuntu"] = { ["Window Background"] = FromRGB(62, 62, 62), ["Inline"] = FromRGB(50, 50, 50), ["Text"] = FromRGB(255, 255, 255), ["Section Background"] = FromRGB(50, 50, 50), ["Element"] = FromRGB(62, 62, 62), ["Border"] = FromRGB(25, 25, 25), ["Outline"] = FromRGB(25, 25, 25), ["Dark Liner"] = FromRGB(62, 62, 62), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(226, 88, 30) },
+
+	    ["Quartz"] = { ["Window Background"] = FromRGB(35, 35, 48), ["Inline"] = FromRGB(29, 27, 38), ["Text"] = FromRGB(255, 255, 255), ["Section Background"] = FromRGB(29, 27, 38), ["Element"] = FromRGB(35, 35, 48), ["Border"] = FromRGB(39, 35, 47), ["Outline"] = FromRGB(39, 35, 47), ["Dark Liner"] = FromRGB(35, 35, 48), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(66, 110, 135) },
+
+	    ["Octohook"] = { ["Window Background"] = FromRGB(35, 35, 35), ["Inline"] = FromRGB(18, 18, 18), ["Text"] = FromRGB(235, 235, 235), ["Section Background"] = FromRGB(18, 18, 18), ["Element"] = FromRGB(35, 35, 35), ["Border"] = FromRGB(60, 60, 60), ["Outline"] = FromRGB(60, 60, 60), ["Dark Liner"] = FromRGB(35, 35, 35), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(255, 135, 255) },
+
+	    ["Nekocheat"] = { ["Window Background"] = FromRGB(18, 18, 18), ["Inline"] = FromRGB(18, 18, 18), ["Text"] = FromRGB(255, 255, 255), ["Section Background"] = FromRGB(18, 18, 18), ["Element"] = FromRGB(18, 18, 18), ["Border"] = FromRGB(60, 60, 60), ["Outline"] = FromRGB(60, 60, 60), ["Dark Liner"] = FromRGB(18, 18, 18), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(226, 30, 112) },
+
+	    ["Nekocheat Blue"] = { ["Window Background"] = FromRGB(18, 18, 18), ["Inline"] = FromRGB(18, 18, 18), ["Text"] = FromRGB(255, 255, 255), ["Section Background"] = FromRGB(18, 18, 18), ["Element"] = FromRGB(18, 18, 18), ["Border"] = FromRGB(60, 60, 60), ["Outline"] = FromRGB(60, 60, 60), ["Dark Liner"] = FromRGB(18, 18, 18), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(0, 247, 255) },
+
+	    ["Gamesense"] = { ["Window Background"] = FromRGB(17, 17, 17), ["Inline"] = FromRGB(17, 17, 17), ["Text"] = FromRGB(235, 235, 235), ["Section Background"] = FromRGB(17, 17, 17), ["Element"] = FromRGB(17, 17, 17), ["Border"] = FromRGB(47, 47, 47), ["Outline"] = FromRGB(47, 47, 47), ["Dark Liner"] = FromRGB(17, 17, 17), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(147, 184, 26) },
+
+ 		["Twitch"] = { ["Window Background"] = FromRGB(31, 31, 35), ["Inline"] = FromRGB(14, 14, 14), ["Text"] = FromRGB(235, 235, 235), ["Section Background"] = FromRGB(14, 14, 14), ["Element"] = FromRGB(31, 31, 35), ["Border"] = FromRGB(45, 45, 45), ["Outline"] = FromRGB(45, 45, 45), ["Dark Liner"] = FromRGB(31, 31, 35), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(169, 112, 255) },
+
+		["misclick.lua"] = { ["Window Background"] = FromRGB(18, 18, 18), ["Inline"] = FromRGB(18, 18, 18), ["Text"] = FromRGB(235, 235, 235), ["Section Background"] = FromRGB(18, 18, 18), ["Element"] = FromRGB(18, 18, 18), ["Border"] = FromRGB(52, 0, 58), ["Outline"] = FromRGB(52, 0, 58), ["Dark Liner"] = FromRGB(18, 18, 18), ["Risky"] = FromRGB(255, 85, 85), ["Accent"] = FromRGB(189, 0, 255) }
+	}
+
+	Library.Theme = table.clone(Themes["Default"])
+	Library.Themes = Themes
 
     local Tween = { } do
         Tween.__index = Tween
